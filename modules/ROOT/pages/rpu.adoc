@@ -1,0 +1,113 @@
+== Setup the Development Environment
+
+=== Prepare the Software
+
+==== Install Required Dependencies
+NOTE: This section is mostly the same as Zephyr official documentation.
+
+===== Update your system
+
+[source,  bash]
+----
+$ sudo apt update && sudo apt upgrade
+----
+
+===== Install dependencies
+
+[source,  bash]
+----
+$ sudo apt install --no-install-recommends git cmake ninja-build gperf \
+    ccache dfu-util device-tree-compiler wget \
+    python3-dev python3-pip python3-setuptools python3-tk python3-wheel xz-utils file \
+    make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
+----
+
+==== Get Zephyr and Python Requirements
+
+===== Create your working directory
+
+[source, bash]
+----
+$ mkdir -p ~/myproject && cd ~/myproject
+----
+
+===== Install the Python venv package
+
+[source, bash]
+----
+$ sudo apt install python3-venv
+----
+
+===== Create a new virtual environment
+
+[source, bash]
+----
+$ python3 -m venv ~/myproject/.venv
+----
+
+===== Activate the virtual environment
+
+[source, bash]
+----
+$ source ~/myproject/.venv/bin/activate
+----
+
+===== Install the west
+
+[source, bash]
+----
+$ pip install west
+----
+
+===== Clone the SC-OBC Module V1 sample repository using west
+
+[source, bash]
+----
+$ cd ~/myproject
+$ west init -m https://github.com/spacecubics/scobc-v1-sample
+$ west update
+$ west zephyr-export
+----
+
+===== Install the Python requirements
+
+[source, bash]
+----
+$ west packages pip --install
+----
+
+==== Install the Zephyr SDK
+
+[source, bash]
+----
+$ west sdk install
+----
+
+==== Install udev rules
+
+Install the udev rules, which allow you to flash most Zephyr boards as a regular user.
+
+[source, bash]
+----
+sudo cp ~/zephyr-sdk-[VERSION]/sysroots/x86_64-pokysdk-linux/usr/share/openocd/contrib/60-openocd.rules \
+        /etc/udev/rules.d
+sudo udevadm control --reload
+----
+
+==== Install the OpenOCD related package
+
+Install the packages required for flashing via *OpenOCD*.
+
+[source, bash]
+----
+sudo apt install libftdi1 libgpiod2 libhidapi-hidraw0 libcapstone4
+----
+
+==== Install the tio package
+
+Although there are several tools available for working with a serial console, this document uses *tio*.
+
+[source, bash]
+----
+sudo apt install tio
+----

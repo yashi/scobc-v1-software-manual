@@ -1,0 +1,63 @@
+== APU
+
+=== Building a PetaLinux Image for the APU
+
+==== Setup the Build Environment
+
+[source,  bash]
+----
+$ sudo apt update
+$ sudo apt install git python3 uv
+----
+
+==== Clone the Repository
+
+[source,  bash]
+----
+$ git clone https://github.com/spacecubics/meta-scobc
+$ cd meta-scobc
+----
+
+==== Install and enable the required Python packages
+
+[source,  bash]
+----
+$ uv sync
+$ source .venv/bin/activate
+----
+
+==== Build the Image
+
+[source,  bash]
+----
+$ kas build kas/scobc-v1.yml
+----
+
+`build/tmp/deploy/images/scobc-v1/` will contain the generated image files.
+
+[source,  bash]
+----
+$ ls -l build/tmp/deploy/images/scobc-v1/*wic
+build/tmp/deploy/images/scobc-v1/petalinux-image-minimal-scobc-v1-yyyyMMddHHmmss.wic
+build/tmp/deploy/images/scobc-v1/petalinux-image-minimal-scobc-v1.wic@
+----
+
+NOTE: `petalinux-image-minimal-scobc-v1.wic` is a symlink to the latest build.
+
+=== Boot from SD Card
+
+==== Flashing the Image to an SD Card
+
+----
+$ sudo dd if=build/tmp/deploy/images/scobc-v1/petalinux-image-minimal-scobc-v1.wic \
+          of=/dev/sdX \
+          bs=4M \
+          status=progress \
+          conv=fsync
+----
+
+==== Boot
+
+----
+boot log here
+----

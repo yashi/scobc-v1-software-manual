@@ -3,3 +3,5 @@
 = SC-OBC Module V1 Software Manual
 
 include::setup.adoc[]
+include::rpu.adoc[]
+include::apu.adoc[]
