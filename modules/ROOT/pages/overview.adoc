@@ -28,8 +28,8 @@ transitions to improve fault tolerance.
 == Evaluation Board
 
 Because SC-OBC Module V1 is a modular OBC, users must at least have
-some kind of I/O board or base board to power the OBC. In this
-document we assume that you have XXXXXX.
+some kind of carrier board to power the OBC. In this document we
+assume that you have V1 Carrier Board SC-MPN-0062A.
 
 == About This Document
 
