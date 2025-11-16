@@ -1,0 +1,2 @@
+:zephyr-gsg: https://docs.zephyrproject.org/latest/develop/getting_started/index.html
+:tio-github: https://github.com/tio/tio
