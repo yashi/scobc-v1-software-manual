@@ -12,22 +12,22 @@ $ cd ~/myproject/zephyr
 $ west build -b scobc_v1 sample/hello_world
 ----
 
-Unfortunately, however, as of this writing, SC-OBC Module V1 port is
-not merged to the upstream, yet. The PR for the OBC is ready and
-waiting for merge.
+NOTE: Unfortunately, however, as of this writing, SC-OBC Module V1
+port is not merged to the upstream, yet. The PR for the OBC is ready
+and waiting for merge.
 
 https://github.com/zephyrproject-rtos/zephyr/pull/98143
 
-Make sure you are using it.
+Make sure you are using the branch.
 
 === Running Zephyr RTOS on SC-OBC Module V1
 
 To run Zephyr RTOS, you can use `west flash`.
 
-Currently `west flash` assume that the boot MODE is set to JTAG, which
-means that `SW1` is set to all `ON`.
+For this step, we assume assume that the boot MODE is set to JTAG,
+which means that `SW1` is set to all `ON`.
 
-For any AMD Versal based board including SC-OBC Module V1, `west
+Currently, for any AMD Versal based board including SC-OBC Module V1, `west
 flash` requires you to have a valid PDI.
 
 [source,  bash]
@@ -39,14 +39,14 @@ $ west flash --pdi /path/to/your.pdi
 The command first load the specified PDI file, then load Zephyr RTOS
 ELF file, and run it.
 
-IMPORTANT: `west flash` for Versal-based board uses `xsdb` for it's
-backend. This means that you must have `xsdb` in one of your `PATH`
-environment variable directories.
+IMPORTANT: `west flash` for Versal-based board uses `xsdb`, instead of
+popular OpenOCD, for it's backend. This means that you must have
+`xsdb` in one of your `PATH` environment variable directories.
 
 === Creating a PDI with Zephyr RTOS
 
-You can create a PDI with with Zephyr RTOS in it, which you can load
-from any boot device Versal supports.
+You can create a PDI with Zephyr RTOS in it. The PDI, then, can be
+load from any boot device Versal supports.
 
 To create a PDI, you use `bootgen`.
 
@@ -68,16 +68,17 @@ new_bif:
 }
 ----
 
-Save it as my.bif, then:
+Save it as, say, `mytest.bif`, then:
 
 [source, bash]
 ----
 $ source /path/to/xilinx/2025.1/Vivado/settings64.sh
-$ bootgen -arch versal -image test.bif -w -o boot.bin
+$ bootgen -arch versal -image mytest.bif -w -o boot.bin
 ----
 
 `bootgen` is provided by AMD (Vivado or Vitis). Make sure you have
-installed it and `source` it before use.
+installed it and `source` the setup script before use.
 
-Generated `boot.bin` can be placed on a SD card or write to SPI NOR
-flash memory. See Versal documentations for more details.
+Generated `boot.bin` can be placed on a SD card or can be written to
+one of the SPI NOR flash memories. See Versal documentations for more
+details.
