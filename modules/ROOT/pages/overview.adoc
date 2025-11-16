@@ -3,6 +3,8 @@
 
 == What is SC-OBC Moudle V1
 
+image::scobc-v1.webp[align="center"]
+
 The SC-OBC Module V1 is a modular onboard computer for space missions
 that need reliable real-time control and edge processing. It is built
 around an AMD Versal Adaptive SoC and a Microchip IGLOO2 FPGA, and is
