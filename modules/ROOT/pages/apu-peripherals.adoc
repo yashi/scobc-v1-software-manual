@@ -26,6 +26,9 @@ build/tmp/deploy/images/scobc-v1/sc-image-dev-scobc-v1.wic@
 
 ==== Ethernet
 
+You can use `ip` command to assign an IP address. Once the device is
+up, you can use any network applications.
+
 ----
 # ip addr flush dev end0
 # ip addr add 10.30.0.123/24 dev end0
@@ -34,6 +37,8 @@ build/tmp/deploy/images/scobc-v1/sc-image-dev-scobc-v1.wic@
 ----
 
 ==== USB
+
+If you have a USB memory, you can mount it like this:
 
 ----
 # mount /dev/sda1 /mnt
@@ -66,24 +71,53 @@ It also has `libgpiod` python3 bindings.
 
 ==== eMMC
 
+If Linux detectec the eMMC, you can see the device file:
+
 ----
 # ls /dev/mmcblk1
 /dev/mmcblk1
 ----
 
+If the device is formatted with a supported filesystem, you can mount
+and use it.
+
+----
+# mount /dev/mmcblk1 /mnt
+# ls /mnt
+----
+
+
 ==== microSD card
+
+It's the same as eMMC. If Linux detectec a SD card, you can see the
+device file:
 
 ----
 # ls /dev/mmcblk0
 /dev/mmcblk0
+# mount /dev/mmcblk1 /mnt
+# ls /mnt
 ----
+
 
 ==== SPI NOR Flash
 
+Under Linux, SPI NOR Flash Memory is a MTD device. If Linux detected
+the device you can see the device like this:
+
 ----
-# ls /dev/mtd0
+# ls /dev/mtd0 /dev/mtd0ro /dev/mtdblock0
 /dev/mtd0
+/dev/mtd0ro
+/dev/mtdblock0
 ----
+
+`/dev/mtd0` is a char device. Thus, you can read from and write to it.
+`/dev/mtdblock0` is a block device.  Thus, you can format it and write
+to it. Both points to the same device.
+
+See http://www.linux-mtd.infradead.org/faq/general.html#L_mtd_what for
+more info.
 
 ===== Write and read data
 
