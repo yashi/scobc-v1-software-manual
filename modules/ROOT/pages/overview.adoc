@@ -56,6 +56,7 @@ building and running Zephyr on the R5F cores in lockstep mode.
 == Ohter Documents
 
 * https://spacecubics.github.io/sc-docs/scobc-v1-product-manual/latest/[SC-OBC Module V1 Product Manual]
+* https://spacecubics.github.io/sc-docs/scobc-v1-dev-product-manual/latest/[SC-OBC Module V1 Development Board Product Manual]
 * https://spacecubics.github.io/sc-docs/scobc-v1-fpga-developers-guide/latest/[SC-OBC Module V1 FPGA Developer Guide]
 * https://docs.amd.com/r/en-US/am011-versal-acap-trm[Versal Adaptive SoC Technical Reference Manual (AM011)]
 * https://docs.amd.com/r/en-US/am012-versal-register-reference[Register reference for Versal Adaptive SoC Devices (AM012)]
