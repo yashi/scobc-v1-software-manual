@@ -1,0 +1,135 @@
+=== Accessing Peripherals
+
+==== Build the dev image
+
+To try out more peripherals, you can build the `sc-image-dev` image.
+
+In `kas`, you can override the target image by creating a file(ex: `override.local.yml`).
+
+----
+header:
+  version: 19
+
+target:
+  - sc-image-dev
+----
+
+Then, build the image with the override file.
+
+----
+$ kas build kas/scobc-v1.yml:override.local.yml
+...
+$ ls -l build/tmp/deploy/images/scobc-v1/*wic
+build/tmp/deploy/images/scobc-v1/sc-image-dev-scobc-v1-yyyyMMddHHmmss.wic
+build/tmp/deploy/images/scobc-v1/sc-image-dev-scobc-v1.wic@
+----
+
+==== Ethernet
+
+----
+# ip addr flush dev end0
+# ip addr add 10.30.0.123/24 dev end0
+# ip route add default via 10.30.0.1 dev end0
+# ip link set dev end0 up
+----
+
+==== USB
+
+----
+# mount /dev/sda1 /mnt
+----
+
+==== GPIO
+
+In `sc-image-dev`, you can use the `gpiod` tools to control GPIOs.
+
+===== Set GPIO(`PMC_MIO12`)
+
+----
+# gpiowrite -c 1 12=1
+----
+
+===== Clear GPIO(`PMC_MIO12`)
+
+----
+# gpiowrite -c 1 12=0
+----
+
+===== Read GPIO(`PMC_MIO12`)
+
+----
+# gpioread -c 1 12
+active
+----
+
+It also has `libgpiod` python3 bindings.
+
+==== eMMC
+
+----
+# ls /dev/mmcblk1
+/dev/mmcblk1
+----
+
+==== microSD card
+
+----
+# ls /dev/mmcblk0
+/dev/mmcblk0
+----
+
+==== SPI NOR Flash
+
+----
+# ls /dev/mtd0
+/dev/mtd0
+----
+
+===== Write and read data
+
+----
+# echo "SPI NOR Flash 1" > /dev/mtd0
+# hexdump -C /dev/mtd0
+----
+
+===== Erase all sectors
+
+----
+# flash_erase /dev/mtd0 0 0
+----
+
+===== Switch banks
+
+----
+# gpioset -c 1 50=0
+# echo "SPI NOR Flash 1" > /dev/mtd0
+# hexdump -C /dev/mtd0
+00000000  53 50 49 20 4e 4f 52 20  46 6c 61 73 68 20 31 0a  |SPI NOR Flash 1.|
+00000010  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
+*
+# gpioset -c 1 50=1
+# hexdump -C /dev/mtd0
+00000000  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
+00000010  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
+*
+# echo "SPI NOR Flash 2" > /dev/mtd0
+# hexdump -C /dev/mtd0
+00000000  53 50 49 20 4e 4f 52 20  46 6c 61 73 68 20 32 0a  |SPI NOR Flash 2.|
+00000010  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
+*
+# gpioset -c 1 50=0
+# hexdump -C /dev/mtd0
+00000000  53 50 49 20 4e 4f 52 20  46 6c 61 73 68 20 31 0a  |SPI NOR Flash 1.|
+00000010  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
+*
+----
+
+==== RTC
+
+----
+# hwclock -s
+# cat /sys/class/rtc/rtc0/date
+2025-11-17
+# cat /sys/class/rtc/rtc0/time
+12:34:56
+----
