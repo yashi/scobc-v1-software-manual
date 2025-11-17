@@ -75,15 +75,6 @@ sudo cp ~/zephyr-sdk-[VERSION]/sysroots/x86_64-pokysdk-linux/usr/share/openocd/c
 sudo udevadm control --reload
 ----
 
-=== Install the OpenOCD related package
-
-Install the packages required for flashing via *OpenOCD*.
-
-[source, bash]
-----
-sudo apt install libftdi1 libgpiod2 libhidapi-hidraw0 libcapstone4
-----
-
 === Install the tio Package
 
 Although there are several tools available for working with a serial
