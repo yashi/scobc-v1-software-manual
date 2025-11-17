@@ -1,4 +1,4 @@
-== APU
+== APU / Linux
 
 === Building a PetaLinux Image for the APU
 
@@ -58,6 +58,4 @@ $ sudo dd if=build/tmp/deploy/images/scobc-v1/sc-image-minimal-scobc-v1.wic \
 
 ==== Boot
 
-----
-boot log here
-----
+To boot the Linux from SD card, you have to set the boot MODE [3:0] pins to "SD0 v3.0" or "0011" by setting SW1 of V1 Carrier Board SC-MPN-0062A to "OFF OFF ON ON".
