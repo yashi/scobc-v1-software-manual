@@ -170,6 +170,9 @@ more info.
 
 ===== Switch banks
 
+SC-OBC Module V1 has two SPI NOR Flash banks.
+You can switch between them by controlling `QSPI_MEM_SEL`(`PMC_MIO50`) pin.
+
 ----
 # gpioset -c 1 50=0
 # echo "SPI NOR Flash 1" > /dev/mtd0
