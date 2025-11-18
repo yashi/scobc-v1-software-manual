@@ -78,11 +78,47 @@ If Linux detectec the eMMC, you can see the device file:
 /dev/mmcblk1
 ----
 
+If you want to make partitions on the eMMC, you can use `fdisk`:
+
+----
+# fdisk /dev/mmcblk1
+
+The number of cylinders for this disk is set to 1942528.
+There is nothing wrong with that, but this is larger than 1024,
+and could in certain setups cause problems with:
+1) software that runs at boot time (e.g., old versions of LILO)
+2) booting and partitioning software from other OSs
+   (e.g., DOS FDISK, OS/2 FDISK)
+
+Command (m for help): n
+Partition type
+   p   primary partition (1-4)
+   e   extended
+p
+Partition number (1-4): 1
+First sector (16-124321791, default 16):
+Using default value 16
+Last sector or +size{,K,M,G,T} (16-124321791, default 124321791):
+Using default value 124321791
+
+Command (m for help): w
+The partition table has been altered.
+Calling ioctl() to re-read partition table
+[  159.487171]  mmcblk1: p1
+----
+
+If you want to make a filesystem on the partition, you can use `mkfs`:
+----
+# mkfs.vfat /dev/mmcblk1p1
+----
+
 If the device is formatted with a supported filesystem, you can mount
 and use it.
 
 ----
-# mount /dev/mmcblk1 /mnt
+# mount /dev/mmcblk1p1 /mnt
+# df -h | grep mmcblk1
+/dev/mmcblk1p1           59.3G     16.0K     59.3G   0% /mnt
 # ls /mnt
 ----
 
