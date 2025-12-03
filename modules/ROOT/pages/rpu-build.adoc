@@ -12,14 +12,6 @@ $ cd ~/myproject/zephyr
 $ west build -b scobc_v1 samples/hello_world
 ----
 
-NOTE: Unfortunately, however, as of this writing, SC-OBC Module V1
-port is not merged to the upstream, yet. The PR for the OBC is ready
-and waiting for merge.
-
-https://github.com/zephyrproject-rtos/zephyr/pull/98143
-
-Make sure you are using the branch.
-
 === Running Zephyr RTOS on SC-OBC Module V1
 
 To run Zephyr RTOS, you can use `west flash`.
