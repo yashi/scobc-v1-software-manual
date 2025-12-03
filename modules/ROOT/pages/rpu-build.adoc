@@ -9,7 +9,7 @@ with the `-b` option to `west build`.
 [source,  bash]
 ----
 $ cd ~/myproject/zephyr
-$ west build -b scobc_v1 sample/hello_world
+$ west build -b scobc_v1 samples/hello_world
 ----
 
 NOTE: Unfortunately, however, as of this writing, SC-OBC Module V1
