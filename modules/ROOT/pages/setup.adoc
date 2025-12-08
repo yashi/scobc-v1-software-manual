@@ -2,7 +2,7 @@
 
 === Requirements
 
-- Ubuntu 22.04 LTS (newer versions may work, but are untested)
+- Ubuntu 24.04 LTS (newer versions may work, but are untested)
 - At least 100 GB of free disk space
 
 === Consoles
