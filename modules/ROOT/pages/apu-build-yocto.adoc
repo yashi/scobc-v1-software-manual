@@ -14,7 +14,8 @@ regular yocto layer.
 [source,  bash]
 ----
 $ sudo apt update
-$ sudo apt install git git-lfs python3 uv
+$ sudo apt install binutils chrpath cpio diffstat file g++ gawk gcc \
+                   git git-lfs lz4 make python3 rpcsvc-proto zstd
 ----
 
 ==== Clone the Repository
