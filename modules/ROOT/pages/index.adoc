@@ -6,6 +6,6 @@ include::overview.adoc[leveloffset=+1]
 
 include::setup.adoc[]
 
-include::apu.adoc[]
-
 include::rpu.adoc[leveloffset=+1]
+
+include::apu.adoc[]
